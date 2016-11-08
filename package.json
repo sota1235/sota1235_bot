@@ -3,5 +3,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "slackbot": "git+ssh://git@github.com/hoto17296/slackbot.git"
   }
 }
