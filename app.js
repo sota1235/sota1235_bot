@@ -1,14 +1,21 @@
 /**
  * @fileoverview Main file of bot.
  */
-const path     = require('path');
-const SlackBot = require('slackbot');
+const path       = require('path');
+const bodyParser = require('body-parser');
+const express    = require('express');
+const SlackBot   = require('slackbot');
+const config     = require('./config');
 
-const bot = new SlackBot(process.env.SLACK_TOKEN, {
-  default_channel: process.env.SLACK_DEFAULT_CHANNEL,
+const bot = new SlackBot(config.SLACK_TOKEN, {
+  default_channel: config.SLACK_DEFAULT_CHANNEL,
 });
+
+bot.http = express();
+bot.http.use(bodyParser.json());
 
 bot.loadDir('./scripts');
 
 bot.start().then(() => {
+  bot.http.listen(config.PORT);
 });
