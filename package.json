@@ -8,6 +8,6 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
-    "slackbot": "git+ssh://git@github.com/hoto17296/slackbot.git"
+    "shrike": "^0.5.1"
   }
 }
