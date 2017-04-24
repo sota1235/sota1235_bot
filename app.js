@@ -7,7 +7,7 @@ const express    = require('express');
 const Shrike     = require('shrike');
 const config     = require('./config');
 
-const bot = new SlackBot(config.SLACK_TOKEN, {
+const bot = new Shrike(config.SLACK_TOKEN, {
   default_channel: config.SLACK_DEFAULT_CHANNEL,
 });
 
