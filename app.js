@@ -4,7 +4,7 @@
 const path       = require('path');
 const bodyParser = require('body-parser');
 const express    = require('express');
-const SlackBot   = require('slackbot');
+const Shrike     = require('shrike');
 const config     = require('./config');
 
 const bot = new SlackBot(config.SLACK_TOKEN, {
