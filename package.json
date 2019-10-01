@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@slack/bolt": "^1.3.0",
+    "dotenv": "^8.1.0",
     "typescript": "^3.1.6"
   },
   "devDependencies": {
@@ -25,6 +26,7 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
+    "run:dev": "node -r dotenv/config lib/index.js",
     "fix": "prettier --write ./src/**/*.ts",
     "tslint": "tslint -c tslint.json 'src/**/*.ts'",
     "lint": "npm run fix && npm run tslint",
