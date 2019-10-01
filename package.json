@@ -1,13 +1,48 @@
 {
-  "name": "sota1235_bot",
+  "name": "ts-boilerplate",
+  "version": "0.0.1",
+  "description": "Simple boilerplate for @sota1235",
   "main": "index.js",
-  "scripts": {
-    "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "engines": {
+    "node": ">=v10.10.0"
+  },
+  "directories": {
+    "lib": "lib"
   },
   "dependencies": {
-    "body-parser": "^1.15.2",
-    "express": "^4.14.0",
-    "shrike": "^0.5.1"
+    "typescript": "^3.1.6"
+  },
+  "devDependencies": {
+    "@types/jest": "24.0.18",
+    "husky": "3.0.7",
+    "jest": "24.9.0",
+    "lint-staged": "9.4.1",
+    "prettier": "1.18.2",
+    "ts-jest": "24.1.0",
+    "tslint": "5.20.0",
+    "tslint-config-prettier": "1.18.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "fix": "prettier --write ./src/**/*.ts",
+    "tslint": "tslint -c tslint.json 'src/**/*.ts'",
+    "lint": "npm run fix && npm run tslint",
+    "test": "jest",
+    "test:ci": "jest -c ./jest.config.ci.js"
+  },
+  "keywords": [],
+  "author": "@sota1235",
+  "license": "MIT",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "npm run lint",
+      "git add"
+    ]
   }
 }
