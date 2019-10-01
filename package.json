@@ -4,7 +4,7 @@
   "description": "Simple boilerplate for @sota1235",
   "main": "index.js",
   "engines": {
-    "node": ">=v10.10.0"
+    "node": ">=v12.10.0"
   },
   "directories": {
     "lib": "lib"
