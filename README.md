@@ -1,4 +1,4 @@
-sota1235 Bot [![CircleCI](https://circleci.com/gh/sota1235/ts-backend-boilerplate.svg?style=svg)](https://circleci.com/gh/sota1235/ts-backend-boilerplate) [![codecov](https://codecov.io/gh/sota1235/ts-boilerplate/branch/master/graph/badge.svg)](https://codecov.io/gh/sota1235/ts-boilerplate)
+sota1235 Bot [![CircleCI](https://circleci.com/gh/sota1235/sota1235_bot.svg?style=svg)](https://circleci.com/gh/sota1235/sota1235_bot)
 ====
 
 ### Requirement
