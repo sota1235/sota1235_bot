@@ -1,4 +1,5 @@
 import { App } from '@slack/bolt';
+import reactionAddedHandlers from './reaction_handlers';
 
 const app = new App({
   signingSecret: process.env.SLACK_SIGNING_SECRET,
@@ -9,8 +10,15 @@ app.message(/echo (.*)/i, ({ say, context }) => {
   say(context.matches[1]);
 });
 
-app.event<'reaction_added'>('reaction_added', async ({ event }) => {
-  console.log(event.reaction);
+app.event<'reaction_added'>('reaction_added', async (args) => {
+  const { event } = args;
+  const reactionName = event.reaction;
+
+  for (const handler in reactionAddedHandlers) {
+    if (handler === reactionName) {
+      reactionAddedHandlers[handler](args);
+    }
+  }
 });
 
 (async () => {
