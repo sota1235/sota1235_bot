@@ -1,6 +1,17 @@
-import { sayGoodBye, sayHello } from "./greetings";
+import { App } from '@slack/bolt';
 
-const worldName: string = "World";
+const app = new App({
+  signingSecret: process.env.SLACK_SIGNING_SECRET,
+  token: process.env.SLACK_BOT_TOKEN,
+});
 
-console.log(sayHello(worldName));
-console.log(sayGoodBye(worldName));
+app.message(/echo (.*)/i, ({ say, context }) => {
+  say(context.matches[1]);
+});
+
+(async () => {
+  // Start the app
+  await app.start(process.env.PORT || 3000);
+
+  console.log('⚡️ Bolt app is running!');
+})();
