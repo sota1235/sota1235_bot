@@ -1,21 +1,9 @@
-sota1235 Bot
+sota1235 Bot [![CircleCI](https://circleci.com/gh/sota1235/sota1235_bot.svg?style=svg)](https://circleci.com/gh/sota1235/sota1235_bot)
 ====
-
-Bot of the sota1235, by the sota1235, for the sota1235.
-
-### Description
-
-My own private bot.
 
 ### Requirement
 
-- node.js v6~
-
-### Usage
-
-### Install
-
-### Contribution
+- Node.js v12
 
 ### Licence
 
