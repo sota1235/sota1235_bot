@@ -9,6 +9,10 @@ app.message(/echo (.*)/i, ({ say, context }) => {
   say(context.matches[1]);
 });
 
+app.event<'reaction_added'>('reaction_added', async ({ event }) => {
+  console.log(event.reaction);
+});
+
 (async () => {
   // Start the app
   await app.start(process.env.PORT || 3000);
