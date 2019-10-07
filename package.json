@@ -15,21 +15,27 @@
   },
   "devDependencies": {
     "@types/jest": "24.0.18",
+    "@typescript-eslint/eslint-plugin": "^2.3.2",
+    "@typescript-eslint/parser": "^2.3.2",
+    "eslint": "^6.5.1",
+    "eslint-config-prettier": "^6.4.0",
+    "eslint-plugin-prettier": "^3.1.1",
     "husky": "3.0.7",
     "jest": "24.9.0",
     "lint-staged": "9.4.1",
     "prettier": "1.18.2",
-    "ts-jest": "24.1.0",
-    "tslint": "5.20.0",
-    "tslint-config-prettier": "1.18.0"
+    "ts-jest": "24.1.0"
   },
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
     "run:dev": "node -r dotenv/config lib/index.js",
-    "fix": "prettier --write ./src/**/*.ts",
-    "tslint": "tslint -c tslint.json 'src/**/*.ts'",
-    "lint": "npm run fix && npm run tslint",
+    "fix": "npm run prettier:fix && npm run eslint:fix",
+    "lint": "npm run prettier && npm run eslint",
+    "eslint": "eslint 'src/**/*.ts'",
+    "eslint:fix": "npm run eslint --fix",
+    "prettier": "prettier './src/**/*.ts'",
+    "prettier:fix": "npm run prettier -- --write",
     "test": "jest",
     "test:ci": "jest -c ./jest.config.ci.js"
   },
@@ -43,7 +49,7 @@
   },
   "lint-staged": {
     "*.ts": [
-      "npm run lint",
+      "npm run fix",
       "git add"
     ]
   }

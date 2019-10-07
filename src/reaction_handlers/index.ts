@@ -1,3 +1,4 @@
+/* eslint @typescript-eslint/camelcase: 0 */
 import { SlackEventMiddlewareArgs } from '@slack/bolt';
 import { checked } from './checked';
 

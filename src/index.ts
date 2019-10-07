@@ -10,7 +10,7 @@ app.message(/echo (.*)/i, ({ say, context }) => {
   say(context.matches[1]);
 });
 
-app.event<'reaction_added'>('reaction_added', async (args) => {
+app.event<'reaction_added'>('reaction_added', async args => {
   const { event } = args;
   const reactionName = event.reaction;
 
