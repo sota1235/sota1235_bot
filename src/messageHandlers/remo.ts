@@ -53,18 +53,18 @@ function generateMessage(body: GetDeviceResponse): string {
 ${device.name}
 [Status]
 - 温度: ${device.newest_events.te.val}℃
-    `;
+`;
 
     if (device.newest_events.hu !== undefined) {
-      text += `\n- 湿度: ${device.newest_events.hu.val}%`;
+      text += `- 湿度: ${device.newest_events.hu.val}%\n`;
     }
 
     if (device.newest_events.il !== undefined) {
-      text += `\n- 照度: ${device.newest_events.il.val}`;
+      text += `- 照度: ${device.newest_events.il.val}\n`;
     }
 
     if (device.newest_events.mo !== undefined) {
-      text += `\n- 人感センサー: ${device.newest_events.mo.val}`;
+      text += `- 人感センサー: ${device.newest_events.mo.val}\n`;
     }
 
     message.push(text);
