@@ -49,9 +49,7 @@ function generateMessage(body: GetDeviceResponse): string {
 
   for (const device of body) {
     let text = `
-[Device Name] 
-${device.name}
-[Status]
+[${device.name}]
 - 温度:thermometer:: ${device.newest_events.te.val}℃
 `;
 
