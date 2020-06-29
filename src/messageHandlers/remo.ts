@@ -52,19 +52,19 @@ function generateMessage(body: GetDeviceResponse): string {
 [Device Name] 
 ${device.name}
 [Status]
-- 温度: ${device.newest_events.te.val}℃
+- 温度:thermometer:: ${device.newest_events.te.val}℃
 `;
 
     if (device.newest_events.hu !== undefined) {
-      text += `- 湿度: ${device.newest_events.hu.val}%\n`;
+      text += `- 湿度:droplet:: ${device.newest_events.hu.val}%\n`;
     }
 
     if (device.newest_events.il !== undefined) {
-      text += `- 照度: ${device.newest_events.il.val}\n`;
+      text += `- 照度:bulb:: ${device.newest_events.il.val}\n`;
     }
 
     if (device.newest_events.mo !== undefined) {
-      text += `- 人感センサー: ${device.newest_events.mo.val}\n`;
+      text += `- 人感センサー:bust_in_silhouette:: ${device.newest_events.mo.val}\n`;
     }
 
     message.push(text);
