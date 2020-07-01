@@ -1,6 +1,7 @@
 import { App } from '@slack/bolt';
 import reactionAddedHandlers from './reaction_handlers';
 import { registerMessageHandlers } from './messageHandlers';
+import { registerSchedulers } from './scheduler';
 
 const app = new App({
   signingSecret: process.env.SLACK_SIGNING_SECRET,
@@ -23,6 +24,8 @@ app.event<'reaction_added'>('reaction_added', async args => {
 (async () => {
   // Start the app
   await app.start(process.env.PORT || 3000);
+
+  registerSchedulers();
 
   console.log('⚡️ Bolt app is running!');
 })();
