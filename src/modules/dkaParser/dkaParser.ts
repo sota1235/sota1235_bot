@@ -1,0 +1,47 @@
+import fetch from 'node-fetch';
+import { JSDOM } from 'jsdom';
+import { ArticleEntity } from '../../entities/article';
+
+const baseURL = 'http://dka-hero.com';
+
+const HorimiyaListURL = `${baseURL}/h_02.html`;
+const AcoListURL = `${baseURL}/aco.html`;
+
+export class DkaParser {
+  getHorimiyaArticleList(): Promise<ArticleEntity[]> {
+    return this.crawlList(HorimiyaListURL);
+  }
+
+  getAcoArticleList(): Promise<ArticleEntity[]> {
+    return this.crawlList(AcoListURL);
+  }
+
+  protected async crawlList(url: string): Promise<ArticleEntity[]> {
+    const res = await fetch(url, {
+      method: 'GET',
+    });
+
+    if (!res.ok) {
+      throw new Error(`Getting a list from ${url} failed`);
+    }
+
+    const dom = new JSDOM(await res.text());
+    const articles = dom.window.document.querySelectorAll(
+      'a[target="contents"]',
+    );
+
+    const results: ArticleEntity[] = [];
+
+    articles.forEach(node => {
+      const title = node.textContent || 'Error: 不明'; // TODO: 例外あるか見るためにerrorを投げずにやる
+      const path = node.getAttribute('href');
+      const url = path !== null ? `${baseURL}/${path}` : '/notfound';
+      results.push({
+        title,
+        url,
+      });
+    });
+
+    return results;
+  }
+}
