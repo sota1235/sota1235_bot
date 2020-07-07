@@ -33,7 +33,7 @@ https://scrapbox.io/sota1235/やることリスト_${now.year}%2F${now.month}
     () => {
       const service = new HorimiyaRssService();
       service
-        .getLatestArticle()
+        .getLatestArticles()
         .then(articles => {
           const text = articles
             .map(article => `[${article.title}] ${article.url}`)
