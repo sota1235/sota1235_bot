@@ -35,9 +35,16 @@ https://scrapbox.io/sota1235/やることリスト_${now.year}%2F${now.month}
       service
         .getLatestArticles()
         .then(articles => {
-          const text = articles
-            .map(article => `[${article.title}] ${article.url}`)
-            .join('\n');
+          let text: string;
+
+          if (articles.length === 0) {
+            text = '最新のマンガはありません';
+          } else {
+            text = articles
+              .map(article => `[${article.title}] ${article.url}`)
+              .join('\n');
+          }
+
           return slackClient.chat.postMessage({
             channel: 'feed-comic',
             text,

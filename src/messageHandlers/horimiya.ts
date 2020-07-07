@@ -7,6 +7,12 @@ export function registerHorimiyaHandler(app: App) {
 
     try {
       const articles = await service.getLatestArticles();
+
+      if (articles.length === 0) {
+        say('新しいマンガはありません');
+        return;
+      }
+
       const text = articles
         .map(article => `[${article.title}] ${article.url}`)
         .join('\n');
