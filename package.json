@@ -50,9 +50,6 @@
     "test": "jest",
     "test:ci": "jest -c ./jest.config.ci.js"
   },
-  "keywords": [],
-  "author": "@sota1235",
-  "license": "MIT",
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
