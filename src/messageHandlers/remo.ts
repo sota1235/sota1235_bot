@@ -72,7 +72,7 @@ function generateMessage(body: GetDeviceResponse): string {
 }
 
 export function registerRemoHandler(app: App) {
-  app.message(/remo/i, async ({ say }) => {
+  app.message(/remo/i, async ({ say, logger }) => {
     const res = await fetch(`${REMO_API_URL}/1/devices`, {
       method: 'GET',
       headers: {
@@ -84,18 +84,19 @@ export function registerRemoHandler(app: App) {
     if (!res.ok) {
       try {
         const body: ErrorResponse = await res.json();
-        say(
+        await say(
           `エラーが発生しました: code - ${body.code} / message: ${body.message}`,
         );
         return;
       } catch (e) {
-        say(`エラーが発生しました: ${e.message}`);
+        logger.error(e);
+        await say(`エラーが発生しました: ${e.message}`);
         return;
       }
     }
 
     const body: GetDeviceResponse = await res.json();
 
-    say(generateMessage(body));
+    await say(generateMessage(body));
   });
 }

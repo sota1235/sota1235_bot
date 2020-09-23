@@ -2,23 +2,24 @@ import { App } from '@slack/bolt';
 import { HorimiyaRssService } from '../services/horimiyaRssService';
 
 export function registerHorimiyaHandler(app: App) {
-  app.message(/horimiya/i, async ({ say }) => {
+  app.message(/horimiya/i, async ({ say, logger }) => {
     const service = new HorimiyaRssService();
 
     try {
       const articles = await service.getLatestArticles();
 
       if (articles.length === 0) {
-        say('新しいマンガはありません');
+        await say('新しいマンガはありません');
         return;
       }
 
       const text = articles
         .map(article => `[${article.title}] ${article.url}`)
         .join('\n');
-      say(text);
+      await say(text);
     } catch (e) {
-      say(e.message);
+      logger.error(e);
+      await say(e.message);
       return;
     }
   });
