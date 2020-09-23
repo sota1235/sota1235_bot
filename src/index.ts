@@ -1,10 +1,14 @@
-import { App } from '@slack/bolt';
+import { App, ExpressReceiver } from '@slack/bolt';
 import reactionAddedHandlers from './reaction_handlers';
 import { registerMessageHandlers } from './messageHandlers';
 import { registerSchedulers } from './scheduler';
 
+const receiver = new ExpressReceiver({
+  signingSecret: process.env.SLACK_SIGNING_SECRET as string,
+});
+
 const app = new App({
-  signingSecret: process.env.SLACK_SIGNING_SECRET,
+  receiver,
   token: process.env.SLACK_BOT_TOKEN,
 });
 
@@ -19,6 +23,10 @@ app.event<'reaction_added'>('reaction_added', async args => {
       reactionAddedHandlers[handler](args);
     }
   }
+});
+
+receiver.router.get('/liveness_check', (_, res) => {
+  res.send('OK');
 });
 
 (async () => {
