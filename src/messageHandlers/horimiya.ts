@@ -1,5 +1,6 @@
 import { App } from '@slack/bolt';
 import { HorimiyaRssService } from '../services/horimiyaRssService';
+import { getView } from '../views/feedComic';
 
 export function registerHorimiyaHandler(app: App) {
   app.message(/horimiya/i, async ({ say, logger }) => {
@@ -7,15 +8,7 @@ export function registerHorimiyaHandler(app: App) {
 
     try {
       const articles = await service.getLatestArticles();
-
-      if (articles.length === 0) {
-        await say('新しいマンガはありません');
-        return;
-      }
-
-      const text = articles
-        .map(article => `[${article.title}] ${article.url}`)
-        .join('\n');
+      const text = getView(articles);
       await say(text);
     } catch (e) {
       logger.error(e);
