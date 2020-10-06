@@ -20,7 +20,7 @@ describe('feedComic', () => {
       }),
     ).toMatchInlineSnapshot(`
       "「堀さんと宮村くん」
-      <https://example.com|[test]>
+      <https://example.com|test>
       "
     `);
   });
@@ -38,7 +38,7 @@ describe('feedComic', () => {
       }),
     ).toMatchInlineSnapshot(`
       "「あことバンビ」
-      <https://example.com|[test]>"
+      <https://example.com|test>"
     `);
   });
 
@@ -68,11 +68,11 @@ describe('feedComic', () => {
       }),
     ).toMatchInlineSnapshot(`
       "「堀さんと宮村くん」
-      <https://example.com|[test]>
-      <https://example.com|[test2]>
+      <https://example.com|test>
+      <https://example.com|test2>
       「あことバンビ」
-      <https://example.com|[test]>
-      <https://example.com|[test2]>"
+      <https://example.com|test>
+      <https://example.com|test2>"
     `);
   });
 });
