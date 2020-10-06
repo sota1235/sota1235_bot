@@ -35,7 +35,8 @@
     "jest": "24.9.0",
     "lint-staged": "9.4.1",
     "prettier": "1.18.2",
-    "ts-jest": "24.1.0"
+    "ts-jest": "24.1.0",
+    "ts-node": "^9.0.0"
   },
   "scripts": {
     "build": "tsc",
@@ -47,6 +48,7 @@
     "eslint:fix": "npm run eslint --fix",
     "_prettier": "prettier './src/**/*.ts'",
     "prettier": "npm run _prettier -- --write",
+    "debug": "ts-node -r dotenv/config",
     "test": "jest",
     "test:ci": "jest -c ./jest.config.ci.js"
   },
