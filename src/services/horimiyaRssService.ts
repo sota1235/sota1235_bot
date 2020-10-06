@@ -9,7 +9,10 @@ export class HorimiyaRssService {
     this.client = getStoreClient();
   }
 
-  async getLatestArticles(): Promise<ArticleEntity[]> {
+  async getLatestArticles(): Promise<{
+    horimiya: ArticleEntity[];
+    aco: ArticleEntity[];
+  }> {
     const crawler = new DkaParser();
 
     const horimiyaList = await crawler.getHorimiyaArticleList();
@@ -20,21 +23,43 @@ export class HorimiyaRssService {
     );
     const latestAcoTitle = await this.client.get(this.getRedisKey('aco'));
 
-    const results: ArticleEntity[] = [];
+    const latestHorimiyaArticles: ArticleEntity[] = [];
+    const latestAcoArticles: ArticleEntity[] = [];
 
-    if (horimiyaList.slice(-1)[0].title !== latestHorimiyaTitle) {
-      const latestArticle = horimiyaList.slice(-1)[0];
-      await this.client.set(this.getRedisKey('horimiya'), latestArticle.title);
-      results.push(latestArticle);
+    for (const horimiyaArticle of horimiyaList.reverse()) {
+      if (horimiyaArticle.title !== latestHorimiyaTitle) {
+        latestHorimiyaArticles.push(horimiyaArticle);
+      } else {
+        break;
+      }
     }
 
-    if (acoList.slice(-1)[0].title !== latestAcoTitle) {
-      const latestArticle = acoList.slice(-1)[0];
-      await this.client.set(this.getRedisKey('aco'), latestArticle.title);
-      results.push(latestArticle);
+    if (latestHorimiyaArticles.length > 0) {
+      await this.client.set(
+        this.getRedisKey('horimiya'),
+        latestHorimiyaArticles[0].title,
+      );
     }
 
-    return results;
+    for (const acoArticle of acoList.reverse()) {
+      if (acoArticle.title !== latestAcoTitle) {
+        latestAcoArticles.push(acoArticle);
+      } else {
+        break;
+      }
+    }
+
+    if (latestAcoArticles.length > 0) {
+      await this.client.set(
+        this.getRedisKey('aco'),
+        latestAcoArticles[0].title,
+      );
+    }
+
+    return {
+      horimiya: latestHorimiyaArticles,
+      aco: latestAcoArticles,
+    };
   }
 
   protected getRedisKey(variant: 'horimiya' | 'aco'): string {

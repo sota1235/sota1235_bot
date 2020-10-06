@@ -2,6 +2,7 @@ import cron, { ScheduleOptions } from 'node-cron';
 import { WebClient } from '@slack/web-api';
 import { DateTime } from 'luxon';
 import { HorimiyaRssService } from './services/horimiyaRssService';
+import { getView } from './views/feedComic';
 
 const slackClient = new WebClient(process.env.SLACK_BOT_TOKEN);
 const cronSettings: ScheduleOptions = {
@@ -34,16 +35,8 @@ https://scrapbox.io/sota1235/やることリスト_${now.year}%2F${now.month}
       const service = new HorimiyaRssService();
       service
         .getLatestArticles()
-        .then(articles => {
-          let text: string;
-
-          if (articles.length === 0) {
-            text = '最新のマンガはありません';
-          } else {
-            text = articles
-              .map(article => `[${article.title}] ${article.url}`)
-              .join('\n');
-          }
+        .then(data => {
+          const text = getView(data);
 
           return slackClient.chat.postMessage({
             channel: 'feed-comic',
