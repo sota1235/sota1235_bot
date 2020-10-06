@@ -1,8 +1,7 @@
-import {HorimiyaRssService} from "../services/horimiyaRssService";
+import { HorimiyaRssService } from '../services/horimiyaRssService';
 
 const service = new HorimiyaRssService();
 
-service.getLatestArticles()
-  .then((result) => {
-    console.log(result);
-  });
+service.getLatestArticles().then(result => {
+  console.log(result);
+});

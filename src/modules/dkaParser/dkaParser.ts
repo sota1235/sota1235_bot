@@ -1,6 +1,7 @@
 import fetch from 'node-fetch';
 import { JSDOM } from 'jsdom';
 import { ArticleEntity } from '../../entities/article';
+import iconv from 'iconv-lite';
 
 const baseURL = 'http://dka-hero.com';
 
@@ -25,7 +26,9 @@ export class DkaParser {
       throw new Error(`Getting a list from ${url} failed`);
     }
 
-    const dom = new JSDOM(await res.text());
+    const buffer = await res.buffer();
+
+    const dom = new JSDOM(iconv.decode(buffer, 'Shift_JIS'));
     const articles = dom.window.document.querySelectorAll(
       'a[target="contents"]',
     );
