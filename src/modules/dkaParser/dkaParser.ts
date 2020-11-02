@@ -3,7 +3,7 @@ import { JSDOM } from 'jsdom';
 import { ArticleEntity } from '../../entities/article';
 import iconv from 'iconv-lite';
 
-const baseURL = 'http://dka-hero.com';
+const baseURL = 'http://dka-hero.me';
 
 const HorimiyaListURL = `${baseURL}/h_02.html`;
 const AcoListURL = `${baseURL}/aco.html`;
