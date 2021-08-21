@@ -2,5 +2,11 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "github>sota1235/renovate-config"
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": ["node-cron", "@types/node-cron"],
+      "groupName": "node-cron"
+    }
   ]
 }
