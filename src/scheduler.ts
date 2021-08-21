@@ -22,7 +22,7 @@ ${now.month}月のやることリストです
 https://scrapbox.io/sota1235/やることリスト_${now.year}%2F${now.month}
       `,
         })
-        .catch(err => {
+        .catch((err) => {
           console.error(err);
         });
     },
@@ -35,7 +35,7 @@ https://scrapbox.io/sota1235/やることリスト_${now.year}%2F${now.month}
       const service = new HorimiyaRssService();
       service
         .getLatestArticles()
-        .then(data => {
+        .then((data) => {
           const text = getView(data);
 
           return slackClient.chat.postMessage({
@@ -43,7 +43,7 @@ https://scrapbox.io/sota1235/やることリスト_${now.year}%2F${now.month}
             text,
           });
         })
-        .catch(err => {
+        .catch((err) => {
           console.error(err);
         });
     },
