@@ -1,8 +1,9 @@
 import { App } from '@slack/bolt';
 import { HorimiyaRssService } from '../services/horimiyaRssService';
 import { getView } from '../views/feedComic';
+import { MessageHandler } from './index';
 
-export function registerHorimiyaHandler(app: App) {
+export const registerHorimiyaHandler: MessageHandler = (app: App) => {
   app.message(/horimiya/i, async ({ say, logger }) => {
     const service = new HorimiyaRssService();
 
@@ -16,4 +17,9 @@ export function registerHorimiyaHandler(app: App) {
       return;
     }
   });
-}
+
+  return {
+    command: 'horimiya',
+    description: 'The newest feed of 堀宮',
+  };
+};

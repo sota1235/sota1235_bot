@@ -2,6 +2,7 @@ import { App, ExpressReceiver } from '@slack/bolt';
 import reactionAddedHandlers from './reaction_handlers';
 import { registerMessageHandlers } from './messageHandlers';
 import { registerSchedulers } from './scheduler';
+import { channels } from './constants';
 
 const receiver = new ExpressReceiver({
   signingSecret: process.env.SLACK_SIGNING_SECRET as string,
@@ -36,4 +37,9 @@ receiver.router.get('/liveness_check', (_, res) => {
   registerSchedulers();
 
   console.log('⚡️ Bolt app is running!');
+
+  await app.client.chat.postMessage({
+    channel: channels.sandbox,
+    text: `Botがデプロイされました ${process.env.SOURCE_VERSION}`,
+  });
 })();
