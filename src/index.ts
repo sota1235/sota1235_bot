@@ -41,5 +41,7 @@ receiver.router.get('/liveness_check', (_, res) => {
   await app.client.chat.postMessage({
     channel: channels.sandbox,
     text: `Botがデプロイされました ${process.env.SOURCE_VERSION}`,
+    token: process.env.SLACK_BOT_TOKEN,
+    icon_emoji: ':wrench:',
   });
 })();
