@@ -50,11 +50,6 @@
     "test": "jest",
     "test:ci": "jest -c ./jest.config.ci.js"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "*.ts": [
       "npm run fix"
