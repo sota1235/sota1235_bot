@@ -12,7 +12,7 @@
     "@slack/bolt": "^2.3.0",
     "@slack/web-api": "^5.10.0",
     "@types/ioredis": "^4.17.0",
-    "@types/jest": "^26.0.0",
+    "@types/jest": "^27.0.0",
     "@types/jsdom": "^16.2.3",
     "@types/luxon": "^1.24.1",
     "@types/node-cron": "^2.0.3",
