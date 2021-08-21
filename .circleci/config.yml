@@ -22,6 +22,11 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run:
+          name: validate renovate config
+          command: |
+            npx --package renovate -c 'renovate-config-validator'
+
+      - run:
           name: test
           command: |
             npm run test:ci
