@@ -3,7 +3,7 @@ sota1235 Bot [![CircleCI](https://circleci.com/gh/sota1235/sota1235_bot.svg?styl
 
 ### Requirement
 
-- Node.js v12
+- Node.js v16
 
 ### Licence
 
