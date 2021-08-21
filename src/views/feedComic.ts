@@ -15,7 +15,7 @@ export function getView({
     if (horimiya.length > 0) {
       text += '「堀さんと宮村くん」\n';
       text += horimiya
-        .map(article => `<${article.url}|${article.title}>`)
+        .map((article) => `<${article.url}|${article.title}>`)
         .join('\n');
       text += '\n';
     }
@@ -23,7 +23,7 @@ export function getView({
     if (aco.length > 0) {
       text += '「あことバンビ」\n';
       text += aco
-        .map(article => `<${article.url}|${article.title}>`)
+        .map((article) => `<${article.url}|${article.title}>`)
         .join('\n');
     }
   }

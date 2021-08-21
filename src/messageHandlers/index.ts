@@ -4,9 +4,7 @@ import { registerRemoHandler } from './remo';
 import { registerHorimiyaHandler } from './horimiya';
 
 // Should return text for help command
-export type MessageHandler = (
-  app: App,
-) => {
+export type MessageHandler = (app: App) => {
   command: string;
   description: string;
 };
