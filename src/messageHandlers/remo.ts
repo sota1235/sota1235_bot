@@ -1,5 +1,6 @@
 import { App } from '@slack/bolt';
 import fetch from 'node-fetch';
+import { MessageHandler } from './index';
 
 const REMO_API_URL = 'https://api.nature.global';
 const REMO_API_TOKEN = process.env.REMO_API_TOKEN;
@@ -71,7 +72,7 @@ function generateMessage(body: GetDeviceResponse): string {
   return message.join('\n');
 }
 
-export function registerRemoHandler(app: App) {
+export const registerRemoHandler: MessageHandler = (app: App) => {
   app.message(/remo/i, async ({ say, logger }) => {
     const res = await fetch(`${REMO_API_URL}/1/devices`, {
       method: 'GET',
@@ -99,4 +100,9 @@ export function registerRemoHandler(app: App) {
 
     await say(generateMessage(body));
   });
-}
+
+  return {
+    command: 'remo',
+    description: 'Room status reported by remo',
+  };
+};
