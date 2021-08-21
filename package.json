@@ -3,7 +3,7 @@
   "private": true,
   "main": "index.js",
   "engines": {
-    "node": ">=v12.10.0"
+    "node": "16.x"
   },
   "directories": {
     "lib": "lib"
