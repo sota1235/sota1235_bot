@@ -32,7 +32,7 @@ receiver.router.get('/liveness_check', (_, res) => {
 
 (async () => {
   // Start the app
-  await app.start(process.env.PORT || 3000);
+  await app.start(3000);
 
   registerSchedulers();
 
