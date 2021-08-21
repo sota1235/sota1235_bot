@@ -48,7 +48,8 @@
     "prettier": "npm run _prettier -- --write",
     "debug": "ts-node -r dotenv/config",
     "test": "jest",
-    "test:ci": "jest -c ./jest.config.ci.js"
+    "test:ci": "jest -c ./jest.config.ci.js",
+    "lint-staged": "lint-staged"
   },
   "lint-staged": {
     "*.ts": [
