@@ -3,6 +3,7 @@ import reactionAddedHandlers from './reaction_handlers';
 import { registerMessageHandlers } from './messageHandlers';
 import { registerSchedulers } from './scheduler';
 import { channels } from './constants';
+import { getDeployInfo } from './config';
 
 const receiver = new ExpressReceiver({
   signingSecret: process.env.SLACK_SIGNING_SECRET as string,
@@ -40,7 +41,9 @@ receiver.router.get('/liveness_check', (_, res) => {
 
   await app.client.chat.postMessage({
     channel: channels.sandbox,
-    text: `Botがデプロイされました ${process.env.SOURCE_VERSION}`,
+    text: `Botがデプロイされました ${
+      getDeployInfo()?.SOURCE_VERSION || 'revision_not_found'
+    }`,
     token: process.env.SLACK_BOT_TOKEN,
     icon_emoji: ':wrench:',
   });
