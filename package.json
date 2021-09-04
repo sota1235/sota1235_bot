@@ -37,7 +37,9 @@
     "ts-node": "^10.0.0"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "npm run build:assets & npm run build:ts",
+    "build:assets": "ts-node src/tool/generateDeployJson.ts",
+    "build:ts": "tsc",
     "watch": "tsc -w",
     "run:dev": "node -r dotenv/config lib/index.js",
     "fix": "npm run prettier && npm run eslint:fix",
