@@ -84,7 +84,7 @@ export const registerRemoHandler: MessageHandler = (app: App) => {
 
     if (!res.ok) {
       try {
-        const body = await res.json() as ErrorResponse;
+        const body = (await res.json()) as ErrorResponse;
         await say(
           `エラーが発生しました: code - ${body.code} / message: ${body.message}`,
         );
@@ -96,7 +96,7 @@ export const registerRemoHandler: MessageHandler = (app: App) => {
       }
     }
 
-    const body = await res.json() as GetDeviceResponse;
+    const body = (await res.json()) as GetDeviceResponse;
 
     await say(generateMessage(body));
   });
