@@ -1,4 +1,4 @@
-sota1235 Bot [![CircleCI](https://circleci.com/gh/sota1235/sota1235_bot.svg?style=svg&circle-token=dcd5d4d5ba0281133f4d35b94f8e41edfeddad32)](https://circleci.com/gh/sota1235/sota1235_bot)
+sota1235 Bot
 ====
 
 ### Requirement
