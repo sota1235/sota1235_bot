@@ -15,7 +15,7 @@
     "@types/jest": "^27.0.0",
     "@types/jsdom": "^16.2.3",
     "@types/luxon": "^2.0.0",
-    "@types/node-cron": "^2.0.4",
+    "@types/node-cron": "^3.0.0",
     "@types/node-fetch": "^2.5.12",
     "dotenv": "^10.0.0",
     "iconv-lite": "^0.6.2",
