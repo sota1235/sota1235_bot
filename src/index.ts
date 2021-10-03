@@ -3,19 +3,14 @@ import reactionAddedHandlers from './reaction_handlers';
 import { registerMessageHandlers } from './messageHandlers';
 import { registerSchedulers } from './scheduler';
 import { channels } from './constants';
-import * as Sentry from '@sentry/node';
 import { Severity } from '@sentry/node';
+import { captureException, initSentry } from './sentry';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('source-map-support').install();
 
 // Sentry initialization
-Sentry.init({
-  dsn: process.env.SENTRY_DSN,
-  tracesSampleRate: 1.0,
-  debug: process.env.NODE_ENV !== 'production',
-  environment: process.env.NODE_ENV,
-});
+initSentry();
 
 // App initialization
 const receiver = new ExpressReceiver({
@@ -29,7 +24,7 @@ const app = new App({
 
 app.error(async (err) => {
   console.error(err);
-  Sentry.captureException(err, {
+  captureException(err, {
     level: Severity.Critical,
   });
 });
