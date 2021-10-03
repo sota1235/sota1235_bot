@@ -9,6 +9,8 @@
     "lib": "lib"
   },
   "dependencies": {
+    "@sentry/node": "^6.13.2",
+    "@sentry/tracing": "^6.13.2",
     "@slack/bolt": "^3.6.0",
     "@slack/web-api": "^6.0.0",
     "@types/ioredis": "^4.17.0",
@@ -37,8 +39,7 @@
     "ts-node": "^10.0.0"
   },
   "scripts": {
-    "build": "npm run build:assets & npm run build:ts",
-    "build:assets": "ts-node src/tool/generateDeployJson.ts",
+    "build": "npm run build:ts",
     "build:ts": "tsc",
     "watch": "tsc -w",
     "run:dev": "node -r dotenv/config lib/index.js",
