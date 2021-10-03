@@ -10,6 +10,7 @@ Sentry.init({
   dsn: process.env.SENTRY_DSN,
   tracesSampleRate: 1.0,
   debug: process.env.NODE_ENV !== 'production',
+  environment: process.env.NODE_ENV,
 });
 
 // App initialization
