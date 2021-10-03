@@ -5,6 +5,9 @@ import { registerSchedulers } from './scheduler';
 import { channels } from './constants';
 import Sentry, { Severity } from '@sentry/node';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('source-map-support').install();
+
 // Sentry initialization
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
