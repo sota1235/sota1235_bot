@@ -50,6 +50,8 @@ app.event<'reaction_added'>('reaction_added', async (args) => {
 // Start
 (async () => {
   // Start the app
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   await app.start(process.env.PORT || 3000);
 
   registerSchedulers();
