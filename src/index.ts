@@ -50,7 +50,7 @@ app.event<'reaction_added'>('reaction_added', async (args) => {
 // Start
 (async () => {
   // Start the app
-  await app.start(3000);
+  await app.start(process.env.PORT || 3000);
 
   registerSchedulers();
 
