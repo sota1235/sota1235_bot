@@ -3,7 +3,8 @@ import reactionAddedHandlers from './reaction_handlers';
 import { registerMessageHandlers } from './messageHandlers';
 import { registerSchedulers } from './scheduler';
 import { channels } from './constants';
-import Sentry, { Severity } from '@sentry/node';
+import * as Sentry from '@sentry/node';
+import { Severity } from '@sentry/node';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('source-map-support').install();
