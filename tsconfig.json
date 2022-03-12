@@ -14,7 +14,8 @@
     "outDir": "./lib"
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "tool/**/*"
   ],
   "exclude": [
     "node_modules"
