@@ -1,8 +1,7 @@
-import { App, ExpressReceiver } from '@slack/bolt';
+import { App } from '@slack/bolt';
 import reactionAddedHandlers from './reaction_handlers';
 import { registerMessageHandlers } from './messageHandlers';
 import { registerSchedulers } from './scheduler';
-import { channels } from './constants';
 import { Severity } from '@sentry/node';
 import { captureException, initSentry } from './sentry';
 
@@ -13,13 +12,11 @@ require('source-map-support').install();
 initSentry();
 
 // App initialization
-const receiver = new ExpressReceiver({
-  signingSecret: process.env.SLACK_SIGNING_SECRET as string,
-});
-
 const app = new App({
-  receiver,
+  signingSecret: process.env.SLACK_SIGNING_SECRET as string,
   token: process.env.SLACK_BOT_TOKEN,
+  socketMode: true,
+  appToken: process.env.SLACK_APP_LEVEL_TOKEN,
 });
 
 app.error(async (err) => {
@@ -27,10 +24,6 @@ app.error(async (err) => {
   captureException(err, {
     level: Severity.Critical,
   });
-});
-
-receiver.router.get('/liveness_check', (_, res) => {
-  res.send('OK');
 });
 
 // Register event handlers
@@ -57,15 +50,4 @@ app.event<'reaction_added'>('reaction_added', async (args) => {
   registerSchedulers();
 
   console.log('⚡️ Bolt app is running!');
-
-  await app.client.chat.postMessage({
-    channel: channels.sandbox,
-    text: `Botがデプロイされました
-    hash: ${process.env.HEROKU_SLUG_COMMIT || 'revision not found'}
-    release version: ${
-      process.env.HEROKU_RELEASE_VERSION || 'version not found'
-    }`,
-    token: process.env.SLACK_BOT_TOKEN,
-    icon_emoji: ':wrench:',
-  });
 })();
