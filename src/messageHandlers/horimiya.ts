@@ -13,7 +13,11 @@ export const registerHorimiyaHandler: MessageHandler = (app: App) => {
       await say(text);
     } catch (e) {
       logger.error(e);
-      await say(e.message);
+      if (e instanceof Error) {
+        await say(e.message);
+      } else {
+        await say('Something wrong on registerHorimiyaHandler');
+      }
       return;
     }
   });
