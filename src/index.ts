@@ -5,12 +5,16 @@ import { registerSchedulers } from './scheduler';
 import { channels } from './constants';
 import { Severity } from '@sentry/node';
 import { captureException, initSentry } from './sentry';
+import { initialize } from './firebase';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('source-map-support').install();
 
 // Sentry initialization
 initSentry();
+
+// Firebase initialization
+initialize();
 
 // App initialization
 const receiver = new ExpressReceiver({
