@@ -2,6 +2,7 @@ import { App } from '@slack/bolt';
 import { registerEchoHandler } from './echo';
 import { registerRemoHandler } from './remo';
 import { registerHorimiyaHandler } from './horimiya';
+import { registerHolidayHandler } from './holiday';
 
 // Should return text for help command
 export type MessageHandler = (app: App) => {
@@ -13,6 +14,7 @@ const messageHandlers: MessageHandler[] = [
   registerEchoHandler,
   registerRemoHandler,
   registerHorimiyaHandler,
+  registerHolidayHandler,
 ];
 
 export const registerMessageHandlers = (app: App): void => {
