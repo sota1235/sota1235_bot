@@ -34,7 +34,7 @@ function generateMessage(body: Devices): string {
 export const registerRemoHandler: MessageHandler = (app: App) => {
   app.message(/remo/i, async ({ say, logger }) => {
     const client = new Api({
-      baseApiParams:  {
+      baseApiParams: {
         headers: {
           Authorization: `Bearer ${REMO_API_TOKEN}`,
         },
