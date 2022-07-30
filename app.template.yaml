@@ -1,0 +1,17 @@
+service: sota1235-bot
+runtime: nodejs16
+instance_class: F1
+env_variables:
+  SLACK_SIGNING_SECRET: {{SLACK_SIGNING_SECRET}}
+  SLACK_BOT_TOKEN: {{SLACK_BOT_TOKEN}}
+  SLACK_APP_LEVEL_TOKEN: {{SLACK_APP_LEVEL_TOKEN}}
+  NODE_ENV: {{NODE_ENV}}
+  REMO_API_TOKEN: {{REMO_API_TOKEN}}
+  STORAGE_TYPE: {{STORAGE_TYPE}}
+  REDIS_URL: {{REDIS_URL}}
+  SENTRY_DSN: {{SENTRY_DSN}}
+handlers:
+  - url: /.*
+    secure: always
+    redirect_http_response_code: 301
+    script: auto
