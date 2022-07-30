@@ -1,15 +1,18 @@
-name: Main
+name: Validating renovate config
 
-on: [push]
+on:
+  push:
+    paths:
+      - 'renovate.json'
 
 jobs:
   build:
-
+    timeout-minutes: 10
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [16.x, 18.x]
 
     steps:
       - uses: actions/checkout@v3
@@ -21,16 +24,3 @@ jobs:
 
       - name: validating renovate config
         run: npx --package renovate -c 'renovate-config-validator'
-
-      - name: npm install
-        run: npm ci
-
-      - name: lint
-        run: npm run lint
-
-      - name: test
-        run: |
-          npm run test:ci
-
-      - name: build
-        run: npm run build

@@ -1,0 +1,41 @@
+name: Check code quality
+
+on:
+  push:
+    paths:
+      - 'src/**'
+      - '.eslintrc.json'
+      - '.prettierrc.js'
+      - '.jest.config.*'
+      - 'package.json'
+      - 'package-lock.json'
+
+jobs:
+  build:
+    timeout-minutes: 20
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run tests with ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: npm install
+        run: npm ci
+
+      - name: lint
+        run: npm run lint
+
+      - name: test
+        run: |
+          npm run test:ci
+
+      - name: build
+        run: npm run build
