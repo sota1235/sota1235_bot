@@ -1,6 +1,7 @@
+lib/
+node_modules/
 .github
 .husky
-lib/
 .env.example
 .eslintrc.json
 .gitignore

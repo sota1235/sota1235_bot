@@ -61,7 +61,8 @@
     "debug": "ts-node -r dotenv/config",
     "test": "jest",
     "test:ci": "jest -c ./jest.config.ci.js",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "gcp-build": "npm run build"
   },
   "lint-staged": {
     "*.ts": [
