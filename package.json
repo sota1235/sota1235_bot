@@ -50,6 +50,7 @@
     "watch": "tsc -w",
     "start:dev": "node -r dotenv/config lib/src/index.js",
     "start:prod": "node lib/src/index.js",
+    "start": "npm run start:prod",
     "fix": "npm run prettier && npm run eslint:fix",
     "lint": "npm run _prettier -- -c && npm run eslint",
     "eslint": "eslint 'src/**/*.ts'",
