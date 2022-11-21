@@ -14,17 +14,17 @@ jobs:
     timeout-minutes: 20
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [16.x, 18.x]
-
     steps:
       - uses: actions/checkout@v3
 
-      - name: Run tests with ${{ matrix.node-version }}
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version-file: '.node-version'
+
+      - run: |
+          node --version
+          npm --version
 
       - name: npm install
         run: npm ci

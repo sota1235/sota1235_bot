@@ -11,10 +11,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Run tests with 16.x
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version-file: '.node-version'
+
+      - run: |
+          node --version
+          npm --version
 
       - name: npm install
         run: npm ci

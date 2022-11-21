@@ -13,10 +13,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set node version
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version-file: '.node-version'
+
+      - run: |
+          node --version
+          npm --version
 
       - name: validating renovate config
         run: npx --package renovate -c 'renovate-config-validator'
