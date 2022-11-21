@@ -1,4 +1,4 @@
-service: sota1235-bot
+service: default
 runtime: nodejs16
 instance_class: F1
 env_variables:
