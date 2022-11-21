@@ -2,11 +2,6 @@ name: Deploy to GAE
 
 on:
   push:
-    branches:
-      - main
-    paths:
-      - '**'
-      - '!README.md'
 
 jobs:
   check-before-deploy:
