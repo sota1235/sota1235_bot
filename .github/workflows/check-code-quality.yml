@@ -3,6 +3,7 @@ name: Check code quality
 on:
   push:
     paths:
+      - '**'
       - '!.github/**'
       - '!README.md'
       - '!.gitignore'
