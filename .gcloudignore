@@ -1,0 +1,14 @@
+.github
+.husky
+lib/
+.env.example
+.eslintrc.json
+.gitignore
+.node-version
+.prettierrc.js
+app.template.yaml
+appManifest.yaml
+jest.config.*
+LICENSE.txt
+README.md
+renovate.json
