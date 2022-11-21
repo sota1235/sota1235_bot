@@ -3,12 +3,10 @@ name: Check code quality
 on:
   push:
     paths:
-      - 'src/**'
-      - '.eslintrc.json'
-      - '.prettierrc.js'
-      - '.jest.config.*'
-      - 'package.json'
-      - 'package-lock.json'
+      - '!.github/**'
+      - '!README.md'
+      - '!.gitignore'
+      - '!LICENSE.txt'
 
 jobs:
   build:
