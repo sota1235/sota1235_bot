@@ -2,6 +2,14 @@ name: Deploy to GAE
 
 on:
   push:
+    branches:
+      - main
+    paths:
+      - '**'
+      - '!.github/**'
+      - '!LICENSE.txt'
+      - '!README.md'
+      - '!renovate.json'
 
 jobs:
   check-before-deploy:
