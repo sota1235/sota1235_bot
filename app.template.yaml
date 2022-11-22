@@ -8,8 +8,8 @@ env_variables:
   SLACK_APP_LEVEL_TOKEN: {{SLACK_APP_LEVEL_TOKEN}}
   REMO_API_TOKEN: {{REMO_API_TOKEN}}
   STORAGE_TYPE: {{STORAGE_TYPE}}
-  REDIS_URL: {{REDIS_URL}}
-  SENTRY_DSN: {{SENTRY_DSN}}
+  REDIS_URL: {{{REDIS_URL}}}
+  SENTRY_DSN: {{{SENTRY_DSN}}}
 handlers:
   - url: /.*
     secure: always
