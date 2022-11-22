@@ -1,4 +1,4 @@
-import { App } from '@slack/bolt';
+import { App, LogLevel } from '@slack/bolt';
 import reactionAddedHandlers from './reaction_handlers';
 import { registerMessageHandlers } from './messageHandlers';
 import { registerSchedulers } from './scheduler';
@@ -17,6 +17,7 @@ const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
   socketMode: true,
   appToken: process.env.SLACK_APP_LEVEL_TOKEN,
+  logLevel: LogLevel.DEBUG,
 });
 
 app.error(async (err) => {
