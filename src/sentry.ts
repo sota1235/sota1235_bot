@@ -13,6 +13,7 @@ export function initSentry() {
       debug: !isProduction,
       environment,
     });
+    console.log('⚡️ Sentry initialized!');
   }
 }
 
