@@ -16,7 +16,7 @@
     "@types/express-serve-static-core": "^4.17.21",
     "@types/ioredis": "^4.17.0",
     "@types/jest": "^29.0.0",
-    "@types/jsdom": "^20.0.0",
+    "@types/jsdom": "^21.0.0",
     "@types/lodash": "^4.14.182",
     "@types/luxon": "^3.0.0",
     "@types/node-cron": "^3.0.0",
