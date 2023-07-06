@@ -17,10 +17,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@e33196f7422957bea03ed53f6fbb155025ffc7b8 # v3
         with:
           node-version-file: '.node-version'
 
@@ -51,10 +51,10 @@ jobs:
       id-token: 'write'
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3
 
       - name: Run tests with 16.x
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@e33196f7422957bea03ed53f6fbb155025ffc7b8 # v3
         with:
           node-version-file: '.node-version'
 
@@ -75,13 +75,13 @@ jobs:
 
       - id: auth
         name: 'Authenticate to Google Cloud'
-        uses: 'google-github-actions/auth@v1'
+        uses: 'google-github-actions/auth@35b0e87d162680511bf346c299f71c9c5c379033' # v1
         with:
           workload_identity_provider: 'projects/166962166615/locations/global/workloadIdentityPools/github-sota1235-bot-deploy/providers/github'
           service_account: 'sota1235-bot-gae-deploy@sandbox-4affa.iam.gserviceaccount.com'
 
       - id: deploy
-        uses: 'google-github-actions/deploy-appengine@v1'
+        uses: 'google-github-actions/deploy-appengine@68ebe24d45b86d60444cfcd28e9506a4d0cde3ca' # v1
 
       - id: debug
         run: 'curl "${{ steps.deploy.outputs.url }}"'
