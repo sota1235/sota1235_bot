@@ -13,13 +13,7 @@ on:
 
 jobs:
   check-before-deploy:
-    timeout-minutes: 10
-    runs-on: ubuntu-latest
-    permissions:
-      contents: 'read'
-
-    steps:
-      - uses: ./.github/workflows/check-code-quality.yml
+    uses: ./.github/workflows/check-code-quality.yml
 
   deploy:
     timeout-minutes: 20
