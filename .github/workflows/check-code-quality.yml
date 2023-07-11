@@ -8,10 +8,13 @@ on:
       - '!README.md'
       - '!.gitignore'
       - '!LICENSE.txt'
+  workflow_call:
 
 jobs:
-  build:
+  check-code-quality:
     timeout-minutes: 20
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
 
     steps:
@@ -21,13 +24,17 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version-file: '.node-version'
+          cache: npm
 
       - run: |
           node --version
           npm --version
 
       - name: npm install
-        run: npm ci
+        run: npm ci --no-audit --no-fund
+
+      - name: build
+        run: npm run build
 
       - name: lint
         run: npm run lint
@@ -35,6 +42,3 @@ jobs:
       - name: test
         run: |
           npm run test:ci
-
-      - name: build
-        run: npm run build

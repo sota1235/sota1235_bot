@@ -3,7 +3,7 @@ sota1235 Bot
 
 ### Requirement
 
-- Node.js v16
+- Node.js v18
 
 ### Licence
 

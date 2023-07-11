@@ -15,30 +15,11 @@ jobs:
   check-before-deploy:
     timeout-minutes: 10
     runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
 
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version-file: '.node-version'
-
-      - run: |
-          node --version
-          npm --version
-
-      - name: npm install
-        run: npm ci
-
-      - name: lint
-        run: npm run lint
-
-      - name: test
-        run: npm run test:ci
-
-      - name: build
-        run: npm run build
+      - uses: ./.github/workflows/check-code-quality.yml
 
   deploy:
     timeout-minutes: 20
@@ -53,7 +34,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Run tests with 16.x
+      - name: Setting up Node.js
         uses: actions/setup-node@v3
         with:
           node-version-file: '.node-version'
