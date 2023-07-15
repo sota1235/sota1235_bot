@@ -6,6 +6,11 @@ on:
       - main
     paths:
       - '**'
+      - '!.env.example'
+      - '!.eslintrc.json'
+      - '!.prettierrc.js'
+      - '!appManifest.yaml'
+      - '!.husky/**'
       - '!.github/**'
       - '!LICENSE.txt'
       - '!README.md'
