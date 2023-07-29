@@ -11,20 +11,16 @@ export class HorimiyaRssService {
 
   async getLatestArticles(): Promise<{
     horimiya: ArticleEntity[];
-    aco: ArticleEntity[];
   }> {
     const crawler = new DkaParser();
 
     const horimiyaList = await crawler.getHorimiyaArticleList();
-    const acoList = await crawler.getAcoArticleList();
 
     const latestHorimiyaTitle = await this.client.get(
       this.getRedisKey('horimiya'),
     );
-    const latestAcoTitle = await this.client.get(this.getRedisKey('aco'));
 
     const latestHorimiyaArticles: ArticleEntity[] = [];
-    const latestAcoArticles: ArticleEntity[] = [];
 
     for (const horimiyaArticle of horimiyaList.reverse()) {
       if (horimiyaArticle.title !== latestHorimiyaTitle) {
@@ -41,28 +37,12 @@ export class HorimiyaRssService {
       );
     }
 
-    for (const acoArticle of acoList.reverse()) {
-      if (acoArticle.title !== latestAcoTitle) {
-        latestAcoArticles.push(acoArticle);
-      } else {
-        break;
-      }
-    }
-
-    if (latestAcoArticles.length > 0) {
-      await this.client.set(
-        this.getRedisKey('aco'),
-        latestAcoArticles[0].title,
-      );
-    }
-
     return {
       horimiya: latestHorimiyaArticles,
-      aco: latestAcoArticles,
     };
   }
 
-  protected getRedisKey(variant: 'horimiya' | 'aco'): string {
+  protected getRedisKey(variant: 'horimiya'): string {
     return `rss:dka:${variant}:latest`;
   }
 }
