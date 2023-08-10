@@ -6,15 +6,10 @@ import iconv from 'iconv-lite';
 const baseURL = 'http://dka-hero.me';
 
 const HorimiyaListURL = `${baseURL}/h_02.html`;
-const AcoListURL = `${baseURL}/aco.html`;
 
 export class DkaParser {
   getHorimiyaArticleList(): Promise<ArticleEntity[]> {
     return this.crawlList(HorimiyaListURL);
-  }
-
-  getAcoArticleList(): Promise<ArticleEntity[]> {
-    return this.crawlList(AcoListURL);
   }
 
   protected async crawlList(url: string): Promise<ArticleEntity[]> {
