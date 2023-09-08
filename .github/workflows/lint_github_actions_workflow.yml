@@ -19,7 +19,7 @@ jobs:
       pull-requests: write
       checks: write
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: reviewdog/action-actionlint@v1
         with:
           tool_name: actionlint
