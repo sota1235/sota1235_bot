@@ -1,6 +1,5 @@
 import { App } from '@slack/bolt';
 import { registerEchoHandler } from './echo';
-import { registerRemoHandler } from './remo';
 import { registerHorimiyaHandler } from './horimiya';
 import { registerPingHandler } from './ping';
 
@@ -12,7 +11,6 @@ export type MessageHandler = (app: App) => {
 
 const messageHandlers: MessageHandler[] = [
   registerEchoHandler,
-  registerRemoHandler,
   registerHorimiyaHandler,
   registerPingHandler,
 ];
