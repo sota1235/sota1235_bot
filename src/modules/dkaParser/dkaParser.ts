@@ -31,7 +31,7 @@ export class DkaParser {
     const results: ArticleEntity[] = [];
 
     articles.forEach((node) => {
-      const title = node.textContent || 'Error: 不明'; // TODO: 例外あるか見るためにerrorを投げずにやる
+      const title = node.textContent ?? 'Error: 不明'; // TODO: 例外あるか見るためにerrorを投げずにやる
       const path = node.getAttribute('href');
       const url = path !== null ? `${baseURL}/${path}` : '/notfound';
       results.push({
