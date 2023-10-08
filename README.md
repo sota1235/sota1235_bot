@@ -1,9 +1,7 @@
 sota1235 Bot
 ====
 
-### Requirement
-
-- Node.js v18
+Slack App for me.
 
 ### Licence
 
