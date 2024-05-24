@@ -62,7 +62,7 @@ jobs:
           service_account: 'sota1235-bot-gae-deploy@sandbox-4affa.iam.gserviceaccount.com'
 
       - id: deploy
-        uses: 'google-github-actions/deploy-appengine@v2'
+        uses: 'google-github-actions/deploy-appengine@429c4012cd8417202d4147856b03421ec4f8717b' # v2
 
       - id: debug
         run: 'curl "${{ steps.deploy.outputs.url }}"'
