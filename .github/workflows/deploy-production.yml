@@ -7,7 +7,7 @@ on:
     paths:
       - '**'
       - '!.env.example'
-      - '!.eslintrc.json'
+      - '!eslint.config.*'
       - '!.prettierrc.js'
       - '!appManifest.yaml'
       - '!.husky/**'

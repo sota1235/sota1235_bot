@@ -4,9 +4,9 @@ import { registerMessageHandlers } from './messageHandlers';
 import { registerSchedulers } from './scheduler';
 import { Severity } from '@sentry/node';
 import { captureException, initSentry } from './sentry';
+import sourceMapSupport from 'source-map-support';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-require('source-map-support').install();
+sourceMapSupport.install();
 
 // Sentry initialization
 initSentry();
