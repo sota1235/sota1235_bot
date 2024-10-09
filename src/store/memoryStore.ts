@@ -1,13 +1,13 @@
 import { Store } from './store';
 
 export class MemoryStore implements Store {
-  private storage: Record<string, any> = {};
+  private storage: Record<string, string | null> = {};
 
-  async get(key: string): Promise<any> {
+  async get(key: string) {
     return this.storage[key];
   }
 
-  async set(key: string, value: any): Promise<any> {
+  async set(key: string, value: string | null) {
     this.storage[key] = value;
   }
 }
