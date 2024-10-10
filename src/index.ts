@@ -2,7 +2,6 @@ import { App, LogLevel } from '@slack/bolt';
 import reactionAddedHandlers from './reaction_handlers';
 import { registerMessageHandlers } from './messageHandlers';
 import { registerSchedulers } from './scheduler';
-import { Severity } from '@sentry/node';
 import { captureException, initSentry } from './sentry';
 import sourceMapSupport from 'source-map-support';
 
@@ -23,7 +22,7 @@ const app = new App({
 app.error(async (err) => {
   console.error(err);
   captureException(err, {
-    level: Severity.Critical,
+    level: 'fatal',
   });
 });
 
