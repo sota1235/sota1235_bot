@@ -18,13 +18,11 @@
     "@types/lodash": "^4.14.182",
     "@types/luxon": "^3.0.0",
     "@types/node-cron": "^3.0.0",
-    "@types/node-fetch": "^2.5.12",
     "dotenv": "^16.0.0",
     "iconv-lite": "^0.6.2",
     "jsdom": "^22.0.0",
     "luxon": "^3.0.0",
     "node-cron": "^3.0.0",
-    "node-fetch": "^2.6.5",
     "source-map-support": "^0.5.20",
     "typescript": "^5.0.0"
   },
@@ -44,8 +42,7 @@
     "typescript-eslint": "8.8.1"
   },
   "scripts": {
-    "build": "npm run build:ts",
-    "build:ts": "tsc",
+    "build": "tsc",
     "watch": "tsc -w",
     "start:dev": "node -r dotenv/config lib/index.js",
     "start:prod": "node lib/index.js",
