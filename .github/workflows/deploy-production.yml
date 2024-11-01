@@ -56,7 +56,7 @@ jobs:
 
       - id: auth
         name: 'Authenticate to Google Cloud'
-        uses: 'google-github-actions/auth@8254fb75a33b976a221574d287e93919e6a36f70' # v2.1.6
+        uses: 'google-github-actions/auth@6fc4af4b145ae7821d527454aa9bd537d1f2dc5f' # v2.1.7
         with:
           workload_identity_provider: 'projects/166962166615/locations/global/workloadIdentityPools/github-sota1235-bot-deploy/providers/github'
           service_account: 'sota1235-bot-gae-deploy@sandbox-4affa.iam.gserviceaccount.com'
