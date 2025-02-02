@@ -9,7 +9,7 @@
     "lib": "lib"
   },
   "dependencies": {
-    "@sentry/node": "8.33.1",
+    "@sentry/node": "8.49.0",
     "@slack/bolt": "^3.17.1",
     "@slack/web-api": "^6.12.0",
     "@types/express-serve-static-core": "^4.17.21",
