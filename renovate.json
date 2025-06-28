@@ -9,7 +9,7 @@
       "groupName": "node-cron"
     },
     {
-      "matchManagers": ["nodejs"],
+      "matchManagers": ["nodenv"],
       "automerge": true
     }
   ]
