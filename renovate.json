@@ -7,6 +7,10 @@
     {
       "matchPackageNames": ["node-cron", "@types/node-cron"],
       "groupName": "node-cron"
+    },
+    {
+      "matchManagers": ["nodenv"],
+      "automerge": true
     }
   ]
 }
