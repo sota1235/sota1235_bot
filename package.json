@@ -38,7 +38,7 @@
     "lint-staged": "15.5.2",
     "mustache": "^4.2.0",
     "prettier": "3.6.2",
-    "ts-jest": "29.4.1",
+    "ts-jest": "29.4.2",
     "ts-node": "^10.0.0",
     "typescript-eslint": "8.43.0"
   },
