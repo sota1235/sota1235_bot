@@ -34,7 +34,7 @@
     "@types/source-map-support": "^0.5.10",
     "eslint": "9.36.0",
     "husky": "9.1.7",
-    "jest": "30.1.3",
+    "jest": "30.2.0",
     "lint-staged": "15.5.2",
     "mustache": "^4.2.0",
     "prettier": "3.6.2",
