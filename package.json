@@ -21,7 +21,7 @@
     "dotenv": "^16.0.0",
     "iconv-lite": "^0.6.2",
     "jsdom": "^26.0.0",
-    "luxon": "^3.0.0",
+    "luxon": "^3.7.1",
     "node-cron": "^3.0.0",
     "source-map-support": "^0.5.20",
     "typescript": "^5.0.0"
