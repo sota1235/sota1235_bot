@@ -27,7 +27,7 @@
     "typescript": "^5.0.0"
   },
   "devDependencies": {
-    "@sentry/types": "8.33.1",
+    "@sentry/types": "8.55.0",
     "@sota1235/eslint-config": "5.0.5",
     "@types/mustache": "^4.2.1",
     "@types/node": "24.9.2",
