@@ -1,0 +1,14 @@
+node_modules
+lib
+.env
+.env.*
+!.env.example
+.git
+.github
+.husky
+*.md
+LICENSE.txt
+appManifest.yaml
+app.yaml
+app.template.yaml
+renovate.json

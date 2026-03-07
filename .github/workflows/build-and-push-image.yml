@@ -1,0 +1,92 @@
+name: Build and Push to Artifact Registry
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**'
+      - '!.env.example'
+      - '!eslint.config.*'
+      - '!.prettierrc.js'
+      - '!appManifest.yaml'
+      - '!.husky/**'
+      - '!.github/**'
+      - '!LICENSE.txt'
+      - '!README.md'
+      - '!renovate.json'
+
+env:
+  PROJECT_ID: sandbox-4affa
+  REGION: asia-northeast1
+  REPOSITORY: sota1235-bot
+  IMAGE_NAME: sota1235-bot
+
+jobs:
+  check-before-deploy:
+    uses: ./.github/workflows/check-code-quality.yml
+
+  build-and-push:
+    timeout-minutes: 20
+    runs-on: ubuntu-latest
+    needs:
+      - check-before-deploy
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - id: auth
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093' # v3.0.0
+        with:
+          workload_identity_provider: 'projects/166962166615/locations/global/workloadIdentityPools/github-sota1235-bot-deploy/providers/github'
+          service_account: 'sota1235-bot-gae-deploy@sandbox-4affa.iam.gserviceaccount.com'
+
+      - name: Set up Docker buildx
+        uses: docker/setup-buildx-action@b5ca514318bd6ebac0fb2aedd5d36ec1b5c232a2 # v3.10.0
+
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@14487ce63c7a62a4a324b0bfb37086795e31c6c1 # v6.16.0
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+            ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE_NAME }}:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Slack Notification
+        if: success()
+        uses: tokorom/action-slack-incoming-webhook@main
+        env:
+          INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          ACTIONS_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        with:
+          text: "sota1235 Botのイメージがpushされました"
+          attachments: |
+            [
+              {
+                "color": "good",
+                "author_name": "${{ github.actor }}",
+                "author_icon": "${{ github.event.sender.avatar_url }}",
+                "fields": [
+                  {
+                    "title": "Commit hash",
+                    "value": "${{ github.sha }}",
+                    "short": true
+                  },
+                  {
+                    "title": "GitHub Actions URL",
+                    "value": "${{ env.ACTIONS_URL }}"
+                  }
+                ]
+              }
+            ]
