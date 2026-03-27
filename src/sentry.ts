@@ -7,7 +7,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 export function initSentry() {
   if (isProduction && process.env.SENTRY_DSN !== undefined) {
     Sentry.init({
-      release: process.env.HEROKU_RELEASE_VERSION, // FIXME
+      release: process.env.K_REVISION,
       dsn: process.env.SENTRY_DSN,
       tracesSampleRate: 1.0,
       debug: !isProduction,

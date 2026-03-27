@@ -1,0 +1,15 @@
+node_modules/
+lib/
+.env
+.env.example
+.github/
+.husky/
+.git/
+*.md
+LICENSE.txt
+renovate.json
+appManifest.yaml
+jest.config.*
+eslint.config.*
+.prettierrc.js
+.gcloudignore

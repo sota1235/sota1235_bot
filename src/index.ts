@@ -1,8 +1,8 @@
 import { App, LogLevel } from '@slack/bolt';
 import reactionAddedHandlers from './reaction_handlers';
 import { registerMessageHandlers } from './messageHandlers';
-import { registerSchedulers } from './scheduler';
 import { captureException, initSentry } from './sentry';
+import { createHttpServer } from './httpServer';
 import sourceMapSupport from 'source-map-support';
 
 sourceMapSupport.install();
@@ -45,9 +45,10 @@ app.event<'reaction_added'>('reaction_added', async (args) => {
   // Start the app
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  await app.start(process.env.PORT ?? 3000);
+  await app.start(3000);
 
-  registerSchedulers();
+  // Start HTTP server for Cloud Run health checks and Cloud Scheduler
+  createHttpServer();
 
   console.log('⚡️ Bolt app is running!');
 })();

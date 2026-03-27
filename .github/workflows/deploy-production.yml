@@ -1,4 +1,4 @@
-name: Deploy to GAE
+name: Deploy to Cloud Run
 
 on:
   push:
@@ -15,6 +15,11 @@ on:
       - '!LICENSE.txt'
       - '!README.md'
       - '!renovate.json'
+
+env:
+  REGION: us-central1
+  SERVICE_NAME: sota1235-bot
+  REGISTRY: us-central1-docker.pkg.dev/sandbox-4affa/sota1235-bot
 
 jobs:
   check-before-deploy:
@@ -33,27 +38,6 @@ jobs:
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
-      - name: Setting up Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
-        with:
-          node-version-file: '.node-version'
-          cache: 'npm'
-
-      - name: npm install
-        run: npm ci
-
-      - name: build app.yaml
-        run: npm run generate:appYaml
-        env:
-          NODE_ENV: production
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-          SLACK_SIGNING_SECRET: ${{ secrets.SLACK_SIGNING_SECRET }}
-          SLACK_APP_LEVEL_TOKEN: ${{ secrets.SLACK_APP_LEVEL_TOKEN }}
-          REMO_API_TOKEN: ${{ secrets.REMO_API_TOKEN }}
-          STORAGE_TYPE: ${{ secrets.STORAGE_TYPE }}
-          REDIS_URL: ${{ secrets.REDIS_URL }}
-          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
-
       - id: auth
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@ba79af03959ebeac9769e648f473a284504d9193' # v2.1.10
@@ -61,11 +45,20 @@ jobs:
           workload_identity_provider: 'projects/166962166615/locations/global/workloadIdentityPools/github-sota1235-bot-deploy/providers/github'
           service_account: 'sota1235-bot-gae-deploy@sandbox-4affa.iam.gserviceaccount.com'
 
-      - id: deploy
-        uses: 'google-github-actions/deploy-appengine@2da1d596e766c0581fca51c92979093ff8a10f67' # v2.1.5
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
 
-      - id: debug
-        run: 'curl "${{ steps.deploy.outputs.url }}"'
+      - name: Build Docker image
+        run: docker build -t ${{ env.REGISTRY }}/${{ env.SERVICE_NAME }}:${{ github.sha }} -t ${{ env.REGISTRY }}/${{ env.SERVICE_NAME }}:latest .
+
+      - name: Push Docker image
+        run: docker push ${{ env.REGISTRY }}/${{ env.SERVICE_NAME }} --all-tags
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run services update ${{ env.SERVICE_NAME }} \
+            --region ${{ env.REGION }} \
+            --image ${{ env.REGISTRY }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
 
       - name: Slack Notification
         if: success()
