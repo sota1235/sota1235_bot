@@ -69,7 +69,7 @@ jobs:
 
       - name: Slack Notification
         if: success()
-        uses: tokorom/action-slack-incoming-webhook@main
+        uses: tokorom/action-slack-incoming-webhook@d57bf1eb618f3dae9509afefa70d5774ad3d42bf # main
         env:
           INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           ACTIONS_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
