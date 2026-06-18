@@ -1,5 +1,4 @@
 import * as Sentry from '@sentry/node';
-import type { ExclusiveEventHintOrCaptureContext } from '@sentry/core/build/types/utils/prepareEvent';
 
 const environment = process.env.NODE_ENV;
 const isProduction = process.env.NODE_ENV === 'production';
@@ -19,7 +18,7 @@ export function initSentry() {
 
 export function captureException(
   err: Error,
-  captureContext?: ExclusiveEventHintOrCaptureContext,
+  captureContext?: Parameters<typeof Sentry.captureException>[1],
 ) {
   if (isProduction) {
     Sentry.captureException(err, captureContext);
