@@ -17,7 +17,8 @@
   },
   "include": [
     "src/**/*",
-    "!src/tool/**/*"
+    "!src/tool/**/*",
+    "!src/**/*.test.ts"
   ],
   "exclude": [
     "node_modules"
