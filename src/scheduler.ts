@@ -1,11 +1,11 @@
-import cron, { ScheduleOptions } from 'node-cron';
+import cron from 'node-cron';
 import { WebClient } from '@slack/web-api';
 import { DateTime } from 'luxon';
 import { HorimiyaRssService } from './services/horimiyaRssService';
 import { getView } from './views/feedComic';
 
 const slackClient = new WebClient(process.env.SLACK_BOT_TOKEN);
-const cronSettings: ScheduleOptions = {
+const cronSettings = {
   timezone: 'Asia/Tokyo',
 };
 
