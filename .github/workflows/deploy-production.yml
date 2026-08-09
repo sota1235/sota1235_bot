@@ -18,8 +18,9 @@ on:
 
 env:
   REGION: us-central1
+  PROJECT_ID: sota1235-bot
   SERVICE_NAME: sota1235-bot
-  REGISTRY: us-central1-docker.pkg.dev/sandbox-4affa/sota1235-bot
+  REGISTRY: us-central1-docker.pkg.dev/sota1235-bot/sota1235-bot
 
 jobs:
   check-before-deploy:
@@ -42,8 +43,8 @@ jobs:
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093' # v3.0.0
         with:
-          workload_identity_provider: 'projects/166962166615/locations/global/workloadIdentityPools/github-sota1235-bot-deploy/providers/github'
-          service_account: 'sota1235-bot-gae-deploy@sandbox-4affa.iam.gserviceaccount.com'
+          workload_identity_provider: 'projects/836861560391/locations/global/workloadIdentityPools/github-sota1235-bot-deploy/providers/github'
+          service_account: 'sota1235-bot-deploy@sota1235-bot.iam.gserviceaccount.com'
 
       - name: Configure Docker for Artifact Registry
         run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
@@ -57,6 +58,7 @@ jobs:
       - name: Deploy to Cloud Run
         run: |
           gcloud run services update ${{ env.SERVICE_NAME }} \
+            --project ${{ env.PROJECT_ID }} \
             --region ${{ env.REGION }} \
             --image ${{ env.REGISTRY }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
 
