@@ -42,13 +42,19 @@ app.event<'reaction_added'>('reaction_added', async (args) => {
 
 // Start
 (async () => {
+  // Start HTTP server first so Cloud Run health checks and Cloud Scheduler
+  // endpoints are available independently of the Slack connection status
+  createHttpServer();
+
   // Start the app
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   await app.start(3000);
 
-  // Start HTTP server for Cloud Run health checks and Cloud Scheduler
-  createHttpServer();
-
   console.log('⚡️ Bolt app is running!');
-})();
+})().catch((err) => {
+  console.error(err);
+  captureException(err, {
+    level: 'fatal',
+  });
+});
