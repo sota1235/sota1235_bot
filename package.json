@@ -22,7 +22,7 @@
     "jsdom": "^30.0.0",
     "luxon": "^3.0.0",
     "source-map-support": "^0.5.20",
-    "typescript": "^6.0.0"
+    "typescript": "^7.0.0"
   },
   "devDependencies": {
     "@sentry/types": "10.69.0",
