@@ -9,7 +9,7 @@
     "lib": "lib"
   },
   "dependencies": {
-    "@sentry/node": "10.70.0",
+    "@sentry/node": "10.71.0",
     "@slack/bolt": "^5.0.0",
     "@slack/web-api": "^7.0.0",
     "@types/express-serve-static-core": "^5.0.0",
@@ -25,7 +25,7 @@
     "typescript": "^6.0.0"
   },
   "devDependencies": {
-    "@sentry/types": "10.70.0",
+    "@sentry/types": "10.71.0",
     "@sota1235/eslint-config": "5.0.5",
     "@types/node": "26.2.0",
     "@types/source-map-support": "^0.5.10",
