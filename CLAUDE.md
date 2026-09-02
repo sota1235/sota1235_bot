@@ -48,7 +48,7 @@ src/
   entities/           # データモデル（ArticleEntity等）
   store/              # データ永続化（抽象Store + MemoryStore実装）
   modules/            # 再利用モジュール（dkaParser: HTML解析）
-  scheduler.ts        # cronジョブ（月次TODO通知、週次漫画更新通知）
+  httpServer.ts       # ヘルスチェック・Cloud Schedulerエンドポイント（週次漫画更新通知）
   sentry.ts           # Sentryエラートラッキング初期化
 ```
 
